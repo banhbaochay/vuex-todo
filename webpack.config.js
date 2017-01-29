@@ -35,6 +35,12 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.sass$/,
+        include: path.join(__dirname, 'src', 'sass'),
+        loader: ["style-loader", "css-loader", "sass-loader"],
+        exclude: /node_modules/
       }
     ]
   },
