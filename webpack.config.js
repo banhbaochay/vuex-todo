@@ -41,6 +41,12 @@ module.exports = {
         include: path.join(__dirname, 'src', 'sass'),
         loader: ["style-loader", "css-loader", "sass-loader"],
         exclude: /node_modules/
+      },
+      {
+        test: /\.coffee$/,
+        include: path.join(__dirname, 'src', 'coffee'),
+        exclude: /node_modules/,
+        loader: ['coffee-loader']
       }
     ]
   },
