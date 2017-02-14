@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
+import store from './vuex/store'
+import Hello from './components/Hello.vue'
 
 require('./sass/app.sass')
 // require('./coffee/app.coffee')
@@ -12,6 +14,8 @@ coffees.keys().forEach(k => {
 })
 
 new Vue({
-  el: '#app',
-  render: h => h(App)
+  store,
+  el: '#hello',
+  render: h => h(Hello)
+  // components: { Hello }
 })
