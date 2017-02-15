@@ -6,7 +6,7 @@
 </template>
 
 <script>
-export default {
+module.exports = {
   computed: {
     message() {
       return this.$store.getters.message;
