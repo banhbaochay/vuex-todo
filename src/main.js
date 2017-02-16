@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 // import store from './vuex/store'
-var store = require('./vuex/store-commonjs')
+// var store = require('./vuex/store-commonjs')
+var store = require('./vuex/store-coffee.coffee')
 import Hello from './components/Hello.vue'
 var HelloCommonJS = require('./components/Hello-commonjs.vue')
+var HelloCoffee = require('./components/Hello-coffee.vue')
 
 require('./sass/app.sass')
 // require('./coffee/app.coffee')
@@ -17,6 +19,6 @@ coffees.keys().forEach(k => {
 
 new Vue({
   store,
-  el: '#hello',
-  render: h => h(HelloCommonJS)
+  el: '#hello-coffee',
+  render: h => h(HelloCoffee)
 })

@@ -47,6 +47,12 @@ module.exports = {
         include: path.join(__dirname, 'src', 'coffee'),
         exclude: /node_modules/,
         loader: ['coffee-loader']
+      },
+      {
+        test: /\.coffee$/,
+        include: path.join(__dirname, 'src', 'vuex'),
+        exclude: /node_modules/,
+        loader: ['coffee-loader']
       }
     ]
   },

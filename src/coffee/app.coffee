@@ -1,5 +1,4 @@
-testCoffee = ->
-  console.log "Testing CoffeeScript"
-  return
+t = ->
+  console.log "ABC"
 
-testCoffee()
+t()
