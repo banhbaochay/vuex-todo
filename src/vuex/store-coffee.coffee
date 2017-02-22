@@ -1,6 +1,8 @@
 Vue = require('vue')
 Vuex = require('vuex')
 
+counter = require('./modules/counter.coffee')
+
 Vue.use(Vuex)
 
 module.exports = new Vuex.Store(
@@ -18,5 +20,8 @@ module.exports = new Vuex.Store(
   getters: {
     message: (state) ->
       state.message
+  },
+  modules: {
+    counter
   }
 )
