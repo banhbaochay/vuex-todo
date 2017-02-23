@@ -14,8 +14,8 @@ module.exports = new Vuex.Store(
       state.message = message
   },
   actions: {
-    setMessage: (store, message) ->
-      store.commit('SET_MESSAGE', message)
+    setMessage: ({commit}, message) ->
+      commit('SET_MESSAGE', message)
   },
   getters: {
     message: (state) ->

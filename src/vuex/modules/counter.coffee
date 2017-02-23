@@ -10,12 +10,12 @@ mutations =
     state.counter--
 
 actions =
-  increaseCounter: (store) ->
-    store.commit('INCREASE_COUNTER')
-  resetCounter: (store) ->
-    store.commit('RESET_COUNTER')
-  decreaseCounter: (store) ->
-    store.commit('DECREASE_COUNTER') if state.counter >= 1
+  increaseCounter: ({ commit }) ->
+    commit('INCREASE_COUNTER')
+  resetCounter: ({ commit }) ->
+    commit('RESET_COUNTER')
+  decreaseCounter: ({ state, commit }) ->
+    commit('DECREASE_COUNTER') if state.counter >= 1
 
 getters =
   counter: ->

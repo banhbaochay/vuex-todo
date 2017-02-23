@@ -10,20 +10,14 @@
 </template>
 
 <script lang="coffee" type="text/coffeescript">
+{ mapGetters, mapActions } = require 'vuex'
+
 module.exports =
-  computed:
-    message: ->
-      @.$store.getters.message
-    counter: ->
-      @.$store.getters.counter
-  methods:
+  computed: mapGetters(['message', 'counter'])
+  methods: Object.assign(
+    mapActions(['increaseCounter', 'decreaseCounter', 'resetCounter']),
     messageChange: (evt) ->
       @.$store.dispatch('setMessage', evt.target.value)
-    increaseCounter: ->
-      @.$store.dispatch('increaseCounter')
-    decreaseCounter: ->
-      @.$store.dispatch('decreaseCounter')
-    resetCounter: ->
-      @.$store.dispatch('resetCounter')
+  )
 
 </script>
