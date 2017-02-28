@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import App from './App.vue'
 // import store from './vuex/store'
 // var store = require('./vuex/store-commonjs')
@@ -17,8 +18,21 @@ coffees.keys().forEach(k => {
   require('./coffee' + k.substr(1))
 })
 
+Vue.use(VueRouter)
+
+const Foo = { template: '<div>foo</div>' }
+const Bar = { template: '<div>bar</div>' }
+const routes = [
+    { path: '/foo', component: Foo },
+    { path: '/bar', component: Bar }
+]
+const router = new VueRouter({
+    routes
+})
+
 new Vue({
   store,
+  router: router,
   el: '#hello-coffee',
   render: h => h(HelloCoffee)
 })
