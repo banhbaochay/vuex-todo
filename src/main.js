@@ -28,24 +28,14 @@ Vue.use(VueRouter)
 //     { path: '/foo', component: Foo },
 //     { path: '/bar', component: Bar }
 // ]
-
-var Account = require('./components/Account.vue')
-var Address = require('./components/Address.vue')
-var Info = require('./components/GetInfo.vue')
-
-const routes = [
-  { path: '/account', component: Account },
-  { path: '/address', component: Address },
-  { path: '/info', component: Info },
-]
-
-const router = new VueRouter({
-    routes
-})
+//
+// const router = new VueRouter({
+//     routes
+// })
 
 new Vue({
   store,
-  router: router,
+  // router: router,
   el: '#hello-coffee',
   render: h => h(HelloCoffee)
 })

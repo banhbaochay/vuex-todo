@@ -1,29 +1,47 @@
 <template>
 <div id="hello-coffee">
-  <p>Message: {{message}}</p>
-  <input :value="message" @input="messageChange" type="text" />
-  <p>Counter: {{counter}}</p>
-  <input type="button" @click="increaseCounter" value="Click +1" />
-  <input type="button" @click="decreaseCounter" value="Click -1" />
-  <input type="button" @click="resetCounter" value="Reset Counter" /><br/><br/>
-  <div class="tab">
-    <router-link to="/account"><button class="tablink">Account</button></router-link>
-    <router-link to="/address"><button class="tablink">Address</button></router-link>
-    <router-link to="/info"><button class="tablink">Info</button></router-link>
-  </div>
-  <!-- <router-view></router-view> -->
+    <p>Message: {{message}}</p>
+    <input :value="message" @input="messageChange" type="text" />
+    <p>Counter: {{counter}}</p>
+    <input type="button" @click="increaseCounter" value="Click +1" />
+    <input type="button" @click="decreaseCounter" value="Click -1" />
+    <input type="button" @click="resetCounter" value="Reset Counter" /><br/><br/>
+    <div class="tab">
+      <button class="tablink" @click="swapComponent('account')">Account</button>
+      <button class="tablink" @click="swapComponent('user-address')">Address</button>
+      <button class="tablink" @click="swapComponent('info')">Info</button>
+    </div>
+
+    <component :is="currentComponent"></component>
+    <table-user></table-user>
 </div>
 </template>
 
 <script lang="coffee" type="text/coffeescript">
+TableUsers = require('./TableUsers.vue')
+Account = require('./Account.vue')
+Address = require('./Address.vue')
+Info = require('./GetInfo.vue')
+
 { mapGetters, mapActions } = require 'vuex'
 
 module.exports =
-  computed: mapGetters(['message', 'counter'])
+  data: () -> {
+      currentComponent: null,
+  }
+  components: {
+    'table-user': TableUsers,
+    'account': Account,
+    'user-address': Address,
+    'info': Info
+  }
+  computed: mapGetters(['message', 'counter',])
   methods: Object.assign(
     mapActions(['increaseCounter', 'decreaseCounter', 'resetCounter']),
     messageChange: (evt) ->
       @.$store.dispatch('setMessage', evt.target.value)
+    swapComponent: (component) ->
+      this.currentComponent = component
   )
 
 </script>
