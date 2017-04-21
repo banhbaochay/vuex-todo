@@ -45,7 +45,7 @@ module.exports =
     messageChange: (evt) ->
       @.$store.dispatch('setMessage', evt.target.value)
     swapComponent: (component) ->
-      this.currentComponent = component
+      @currentComponent = component
   )
 
 </script>

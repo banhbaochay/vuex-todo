@@ -21,6 +21,9 @@ mutations =
     user = (state.users.filter (user) -> user.id == id)[0]
     user.account = newUser.account
     user.address = newUser.address
+  REMOVE_USER: (state, user) ->
+    index = state.users.indexOf(user)
+    state.users.splice(index,1)
   CLEAR: () ->
     state.account = ''
     state.address = ''
@@ -33,6 +36,8 @@ actions =
     commit('ADD_USER')
   editUser: ({commit}, data) ->
     commit('EDIT_USER', data)
+  removeUser: ({commit}, id) ->
+    commit('REMOVE_USER', id)
   clear: ({commit}) ->
     commit('CLEAR')
 getters =

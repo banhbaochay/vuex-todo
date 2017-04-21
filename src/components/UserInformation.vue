@@ -4,6 +4,7 @@
     <p> - Account: <input ref="txtAccount" class="input" :class="{active: isActive}" :value="user.account"/></p>
     <p> - Address: <input ref="txtAddress" class="input" :class="{active: isActive}" :value="user.address"/></p>
     <button @click="edit">{{buttonName}}</button>
+    <button @click="removeUser(user)">Remove</button>
     <router-link :to="{name: 'home'}"><button>Back</button></router-link>
 </div>
 </template>
@@ -28,6 +29,9 @@ module.exports =
         @.$store.dispatch('editUser', [newUser, @.id])
         @.isActive = false;
         @.buttonName = "Edit";
+    removeUser: (user) ->
+      @.$store.dispatch('removeUser', user)
+      @.$router.push('/')
   }
   computed:{
     users: () ->  @.$store.getters.users;
