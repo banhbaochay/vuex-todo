@@ -23,7 +23,7 @@ mutations =
     user.address = newUser.address
   REMOVE_USER: (state, user) ->
     index = state.users.indexOf(user)
-    state.users.splice(index,1)
+    state.users.splice(index, 1)
   CLEAR: () ->
     state.account = ''
     state.address = ''
