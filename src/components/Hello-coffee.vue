@@ -1,20 +1,24 @@
 <template>
-<div id="hello-coffee">
-    <p>Message: {{message}}</p>
-    <input :value="message" @input="messageChange" type="text" />
-    <p>Counter: {{counter}}</p>
-    <input type="button" @click="increaseCounter" value="Click +1" />
-    <input type="button" @click="decreaseCounter" value="Click -1" />
-    <input type="button" @click="resetCounter" value="Reset Counter" /><br/><br/>
-    <div class="tab">
-      <button class="tablink" @click="swapComponent('account')">Account</button>
-      <button class="tablink" @click="swapComponent('user-address')">Address</button>
-      <button class="tablink" @click="swapComponent('info')">Info</button>
-    </div>
+<div>
+  <div id="hello-coffee">
+      <p>Message: {{message}}</p>
+      <input :value="message" @input="messageChange" type="text" />
+      <p>Counter: {{counter}}</p>
+      <input type="button" @click="increaseCounter" value="Click +1" />
+      <input type="button" @click="decreaseCounter" value="Click -1" />
+      <input type="button" @click="resetCounter" value="Reset Counter" /><br/><br/>
+      <div class="tab">
+        <button class="tablink" @click="swapComponent('account')">Account</button>
+        <button class="tablink" @click="swapComponent('user-address')">Address</button>
+        <button class="tablink" @click="swapComponent('info')">Info</button>
+      </div>
 
-    <component :is="currentComponent"></component>
-    <table-user></table-user>
+      <component :is="currentComponent"></component>
+      <table-user></table-user>
+  </div>
+  <router-view></router-view>
 </div>
+
 </template>
 
 <script lang="coffee" type="text/coffeescript">

@@ -21,21 +21,23 @@ coffees.keys().forEach(k => {
 })
 
 Vue.use(VueRouter)
-
+var UserInformation = require('./components/UserInformation.vue')
 // const Foo = { template: '<div>foo</div>' }
 // const Bar = { template: '<div>bar</div>' }
-// const routes = [
-//     { path: '/foo', component: Foo },
-//     { path: '/bar', component: Bar }
-// ]
-//
-// const router = new VueRouter({
-//     routes
-// })
+const routes = [
+    // { path: '/foo', component: Foo },
+    // { path: '/bar', component: Bar },
+    { name: 'home', path: '/', component: HelloCoffee },
+    { name: 'user-info', path: '/user/:id', component: UserInformation }
+]
+
+const router = new VueRouter({
+    routes
+})
 
 new Vue({
   store,
-  // router: router,
-  el: '#hello-coffee',
-  render: h => h(HelloCoffee)
-})
+  router: router,
+  // el: '#hello-coffee',
+  // render: h => h(HelloCoffee)
+}).$mount("#app")

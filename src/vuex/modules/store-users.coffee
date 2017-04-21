@@ -1,5 +1,6 @@
 state =
-  users: [{"account":"abc","address":"Ha Noi"},{"account":"test","address":"Da Nang"},{"account":"test124","address":"Ho Chi Minh"}],
+  users: [{id: 1, account:"abc", address:"Ha Noi"}, {id: 2, account:"test", address:"Da Nang"}, {id: 3, account:"test124", address:"Ho Chi Minh"}],
+  id: 3, # id is a counter, when user add a new user, it is increased by one
   account:'',
   address:'',
 
@@ -9,10 +10,19 @@ mutations =
   SET_ADDRESS: (state, address) ->
     state.address = address
   ADD_USER: (state) ->
+    users = state.users
+    state.id = state.id + 1
     state.users.push({
+      id: state.id,
       account: state.account,
       address: state.address
-      })
+    })
+
+  UPDATE_USER: (state, updatedUser) ->
+    users = state.users
+    user = (users.find (user) -> user.id == updatedUser.id)
+    index = users.indexOf(user)
+    users[index] = updatedUser
   CLEAR: () ->
     state.account = ''
     state.address = ''
@@ -23,6 +33,8 @@ actions =
     commit('SET_ADDRESS', address)
   addUser: ({commit}) ->
     commit('ADD_USER')
+  updatedUser: ({commit}, updatedUser) ->
+    commit('UPDATE_USER', updatedUser)
   clear: ({commit}) ->
     commit('CLEAR')
 getters =

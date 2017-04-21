@@ -3,6 +3,7 @@
   <table>
     <thead>
       <tr>
+        <th>ID</th>
         <th>Account</th>
         <th>Address</th>
         <th>Action</th>
@@ -10,10 +11,11 @@
     </thead>
     <tbody>
       <tr v-for="user in users">
+        <td>{{ user.id }}</td>
         <td>{{ user.account }}</td>
         <td>{{ user.address }}</td>
         <td>
-          <button>Show</button>
+          <router-link :to="{name: 'user-info', params: {id: user.id}}"><button>Show</button></router-link>
         </td>
       </tr>
     </tbody>
