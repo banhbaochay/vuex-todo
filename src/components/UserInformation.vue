@@ -16,7 +16,6 @@ module.exports =
     {
       buttonName: "Edit",
       isActive: false,
-      id: parseInt(@.$route.params.id),
       user:
         id: -1
         account: ''
@@ -36,7 +35,7 @@ module.exports =
         @buttonName = "Save"
         @.$refs.txtAccount.focus()
       else
-        @.$store.dispatch('editUser', @user)
+        @.$store.dispatch('updatedUser', @user)
         @isActive = false
         @buttonName = "Edit"
   }
