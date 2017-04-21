@@ -11,16 +11,15 @@ mutations =
     state.address = address
   ADD_USER: (state) ->
     state.users.push({
-      id: state.users.length+1,
+      id: state.users.length + 1,
       account: state.account,
       address: state.address
     })
-  EDIT_USER: (state, data) ->
-    newUser = data[0]
-    id = data[1]
-    user = (state.users.filter (user) -> user.id == id)[0]
-    user.account = newUser.account
-    user.address = newUser.address
+  EDIT_USER: (state, updatedUser) ->
+    users = state.users
+    user = (users.find (user) -> user.id == updatedUser.id)
+    index = users.indexOf(user)
+    users[index] = updatedUser
   CLEAR: () ->
     state.account = ''
     state.address = ''
@@ -31,8 +30,8 @@ actions =
     commit('SET_ADDRESS', address)
   addUser: ({commit}) ->
     commit('ADD_USER')
-  editUser: ({commit}, data) ->
-    commit('EDIT_USER', data)
+  editUser: ({commit},updatedUser) ->
+    commit('EDIT_USER', updatedUser)
   clear: ({commit}) ->
     commit('CLEAR')
 getters =
