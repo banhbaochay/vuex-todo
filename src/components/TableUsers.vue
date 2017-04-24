@@ -16,6 +16,7 @@
         <td>{{ user.address }}</td>
         <td>
           <router-link :to="{name: 'user-info', params: {id: user.id}}"><button>Show</button></router-link>
+          <button @click="removeUser(user.id)">Remove</button>
         </td>
       </tr>
     </tbody>
@@ -28,12 +29,17 @@
 
 module.exports =
   computed: mapGetters(['users'])
+  methods: {
+    removeUser: (id) ->
+      @.$store.dispatch('removeUser', id)
+      alert("Remove user " + id + " sucessfully !")
+  }
 
 </script>
 <style>
 table {
     border-collapse: collapse;
-    width: 50%;
+    width: 80%;
     margin-top: 10px;
 }
 

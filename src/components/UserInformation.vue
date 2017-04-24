@@ -4,6 +4,7 @@
     <p> - Account: <input ref="txtAccount" class="input" :class="{active: isActive}" v-model="user.account"/></p>
     <p> - Address: <input ref="txtAddress" class="input" :class="{active: isActive}" v-model="user.address"/></p>
     <button @click="edit">{{buttonName}}</button>
+    <button @click="removeUser(user.id)">Remove</button>
     <router-link :to="{name: 'home'}"><button>Back</button></router-link>
 </div>
 </template>
@@ -38,6 +39,9 @@ module.exports =
         @.$store.dispatch('updatedUser', @user)
         @isActive = false
         @buttonName = "Edit"
+    removeUser: (id) ->
+      @.$store.dispatch('removeUser', id)
+      @.$router.push('/')
   }
 
 </script>

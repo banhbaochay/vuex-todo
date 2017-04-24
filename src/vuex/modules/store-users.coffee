@@ -1,3 +1,4 @@
+_ = require 'underscore'
 state =
   users: [{id: 1, account:"abc", address:"Ha Noi"}, {id: 2, account:"test", address:"Da Nang"}, {id: 3, account:"test124", address:"Ho Chi Minh"}],
   id: 3, # id is a counter, when user add a new user, it is increased by one
@@ -17,12 +18,14 @@ mutations =
       account: state.account,
       address: state.address
     })
-
   UPDATE_USER: (state, updatedUser) ->
     users = state.users
     user = (users.find (user) -> user.id == updatedUser.id)
     index = users.indexOf(user)
     users[index] = updatedUser
+  REMOVE_USER: (state, id) ->
+    result = _.reject(state.users, (user) -> user.id == id)
+    state.users = result
   CLEAR: () ->
     state.account = ''
     state.address = ''
@@ -35,6 +38,8 @@ actions =
     commit('ADD_USER')
   updatedUser: ({commit}, updatedUser) ->
     commit('UPDATE_USER', updatedUser)
+  removeUser: ({commit}, id) ->
+    commit('REMOVE_USER', id)
   clear: ({commit}) ->
     commit('CLEAR')
 getters =
