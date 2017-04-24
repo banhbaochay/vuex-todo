@@ -3,17 +3,22 @@
   <table>
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Account</th>
-        <th>Address</th>
-        <th>Action</th>
+        <th v-for="key in columns" @click="sortBy(key)">
+          {{ key }}
+        </th>
+        <th>
+          Action
+        </th>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td v-for="key in columns">
+          <input v-model="searchQuery"/>
+        </td>
+      </tr>
       <tr v-for="user in users">
-        <td>{{ user.id }}</td>
-        <td>{{ user.account }}</td>
-        <td>{{ user.address }}</td>
+        <td v-for="key in columns">{{user[key]}}</td>
         <td>
           <router-link :to="{name: 'user-info', params: {id: user.id}}"><button>Show</button></router-link>
           <button @click="removeUser(user.id)">Remove</button>
@@ -28,11 +33,20 @@
 { mapGetters, mapActions } = require 'vuex'
 
 module.exports =
-  computed: mapGetters(['users'])
+  data: () -> {
+    columns: ['id', 'account', 'address']
+    searchQuery: ''
+  }
+  computed: mapGetters(['users', ''])
   methods: {
     removeUser: (id) ->
       @.$store.dispatch('removeUser', id)
       alert("Remove user " + id + " sucessfully !")
+    sortBy: (key) ->
+      @.$store.dispatch('sortBy', key)
+    searchUser: (key, evt) ->
+      # console.log(evt.target.value)
+      @.$store.dispatch('searchUser', [key, evt.target.value])
   }
 
 </script>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
-// import App from './App.vue'
+import App from './App.vue'
 // import store from './vuex/store'
 // var store = require('./vuex/store-commonjs')
 Vue.use(Vuex)
