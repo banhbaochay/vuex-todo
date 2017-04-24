@@ -1,8 +1,8 @@
 <template>
 <div id="hello-coffee">
     <p> User Information : </p>
-    <p> - Account: <input ref="txtAccount" class="input" :class="{active: isActive}" :value="user.account"/></p>
-    <p> - Address: <input ref="txtAddress" class="input" :class="{active: isActive}" :value="user.address"/></p>
+    <p> - Account: <input ref="txtAccount" class="input" :class="{active: isActive}" v-model="user.account"/></p>
+    <p> - Address: <input ref="txtAddress" class="input" :class="{active: isActive}" v-model="user.address"/></p>
     <button @click="edit">{{buttonName}}</button>
     <button @click="removeUser(user)">Remove</button>
     <router-link :to="{name: 'home'}"><button>Back</button></router-link>
@@ -11,33 +11,37 @@
 
 <script lang="coffee" type="text/coffeescript">
 { mapGetters} = require 'vuex'
-
+_ = require 'underscore'
 module.exports =
-  data: () ->{
-    buttonName: "Edit",
-    isActive: false,
-    id: parseInt(@.$route.params.id),
-  }
+  data: () ->
+    {
+      buttonName: "Edit",
+      isActive: false,
+      user:
+        id: -1
+        account: ''
+        address: ''
+    }
+
+  mounted: ->
+    users = @.$store.getters.users
+    id = parseInt(@.$route.params.id)
+    user = users.find (user) -> user.id == id
+    @user = _.clone(user)
+
   methods: {
     edit: () ->
-      if @.buttonName == "Edit"
-        @.isActive = true;
-        @.buttonName = "Save";
-        @.$refs.txtAccount.focus();
+      if @buttonName == "Edit"
+        @isActive = true
+        @buttonName = "Save"
+        @.$refs.txtAccount.focus()
       else
-        newUser = {account: @.$refs.txtAccount.value, address: @.$refs.txtAddress.value}
-        @.$store.dispatch('editUser', [newUser, @.id])
-        @.isActive = false;
-        @.buttonName = "Edit";
+        @.$store.dispatch('updatedUser', @user)
+        @isActive = false
+        @buttonName = "Edit"
     removeUser: (user) ->
       @.$store.dispatch('removeUser', user)
       @.$router.push('/')
-  }
-  computed:{
-    users: () ->  @.$store.getters.users;
-    user: () ->
-      id = parseInt(@.$route.params.id)
-      (@.users.filter (user) -> user.id == id)[0]
   }
 
 </script>
