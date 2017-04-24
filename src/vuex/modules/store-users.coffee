@@ -1,3 +1,4 @@
+_ = require 'underscore'
 state =
   users: [{id: 1, account:"abc", address:"Ha Noi"}, {id: 2, account:"test", address:"Da Nang"}, {id: 3, account:"test124", address:"Ho Chi Minh"}],
   id: 3, # id is a counter, when user add a new user, it is increased by one
@@ -11,7 +12,6 @@ mutations =
     state.address = address
   ADD_USER: (state) ->
     users = state.users
-    console.log(state.id)
     state.id = state.id + 1
     state.users.push({
       id: state.id,
@@ -23,9 +23,9 @@ mutations =
     user = (users.find (user) -> user.id == updatedUser.id)
     index = users.indexOf(user)
     users[index] = updatedUser
-  REMOVE_USER: (state, user) ->
-    index = state.users.indexOf(user)
-    state.users.splice(index, 1)
+  REMOVE_USER: (state, id) ->
+    result = _.reject(state.users, (user) -> user.id == id)
+    state.users = result
   CLEAR: () ->
     state.account = ''
     state.address = ''
