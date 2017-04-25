@@ -1,7 +1,7 @@
 <template>
     <div id="header">
       <div class="container">
-        <h3>User Management</h3>
+        <h3>Example</h3>
       </div>
     </div>
 </template>

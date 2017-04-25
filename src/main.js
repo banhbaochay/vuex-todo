@@ -21,13 +21,17 @@ coffees.keys().forEach(k => {
 })
 
 Vue.use(VueRouter)
+var Welcome = require('./components/Welcome.vue')
+var Counter = require('./components/Counter.vue')
 var UserInformation = require('./components/UserInformation.vue')
 // const Foo = { template: '<div>foo</div>' }
 // const Bar = { template: '<div>bar</div>' }
 const routes = [
     // { path: '/foo', component: Foo },
     // { path: '/bar', component: Bar },
-    { name: 'home', path: '/', component: HelloCoffee },
+    { name: 'home', path: '/', component: App },
+    { name: 'welcome', path: '/welcome', component: Welcome },
+    { name: 'counter', path: '/counter', component: Counter },
     { name: 'user-info', path: '/user/:id', component: UserInformation }
 ]
 

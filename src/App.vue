@@ -1,8 +1,8 @@
 <template>
   <div>
     <nav-header></nav-header>
-    <!-- <main-content></main-content>
-    <nav-footer></nav-footer> -->
+    <main-content></main-content>
+    <nav-footer></nav-footer>
   </div>
 </template>
 

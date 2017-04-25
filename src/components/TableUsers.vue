@@ -14,10 +14,10 @@
     <tbody>
       <tr>
         <td v-for="key in columns">
-          <input v-model="searchQuery"/>
+          <input v-model="search[key]"/>
         </td>
       </tr>
-      <tr v-for="user in users">
+      <tr v-for="user in filteredUsers">
         <td v-for="key in columns">{{user[key]}}</td>
         <td>
           <router-link :to="{name: 'user-info', params: {id: user.id}}"><button>Show</button></router-link>
@@ -31,13 +31,24 @@
 
 <script lang="coffee" type="text/coffeescript">
 { mapGetters, mapActions } = require 'vuex'
+_ = require 'underscore'
 
 module.exports =
   data: () -> {
     columns: ['id', 'account', 'address']
-    searchQuery: ''
+    search: {'id': '', 'account': '', 'address': ''}
   }
-  computed: mapGetters(['users', ''])
+  computed: _.extend mapGetters(['users']),
+    filteredUsers: ->
+      queryId = @search['id']
+      queryAcc = @search['account']
+      queryAddress = @search['address']
+
+      @users.filter (user) ->
+        user.id.toString().includes(queryId) &&
+        user.account.includes(queryAcc) &&
+        user.address.includes(queryAddress)
+      # @users
   methods: {
     removeUser: (id) ->
       @.$store.dispatch('removeUser', id)
@@ -45,8 +56,8 @@ module.exports =
     sortBy: (key) ->
       @.$store.dispatch('sortBy', key)
     searchUser: (key, evt) ->
-      # console.log(evt.target.value)
       @.$store.dispatch('searchUser', [key, evt.target.value])
+
   }
 
 </script>

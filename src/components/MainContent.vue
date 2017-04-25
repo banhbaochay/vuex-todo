@@ -1,9 +1,14 @@
 <template>
     <div id="main">
       <div class="container">
-        <p>
-          Copyright © VA 2017
-        </p>
+        <div class="list-group">
+          <router-link :to="{name: 'welcome'}"><a href="#" class="list-group-item">Welcome</a></router-link>
+          <router-link :to="{name: 'counter'}"><a href="#" class="list-group-item">Counter</a></router-link>
+          <a href="#" class="list-group-item">User management</a>
+        </div>
+        <div class="content">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
 </template>

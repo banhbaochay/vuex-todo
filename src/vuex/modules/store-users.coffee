@@ -31,14 +31,6 @@ mutations =
   SORT_BY: (state, key) ->
     state.reverse = (!state.reverse) ? true : false
     state.users = if (state.reverse) then _.sortBy(state.users, key).reverse() else _.sortBy(state.users, key)
-  SEARCH_USER: (state, data) ->
-    # debugger
-    key = data[0]
-    query = data[1]
-    # state.searchQuery = query
-    console.log(query)
-    state.users = state.users.filter (user) -> user[key] == query
-    console.log(state.users)
   CLEAR: () ->
     state.account = ''
     state.address = ''
@@ -55,8 +47,6 @@ actions =
     commit('REMOVE_USER', id)
   sortBy: ({commit}, key) ->
     commit('SORT_BY', key)
-  searchUser: ({commit}, data) ->
-    commit('SEARCH_USER', data)
   clear: ({commit}) ->
     commit('CLEAR')
 getters =
@@ -66,7 +56,5 @@ getters =
     state.account
   address: (state) ->
     state.address
-  searchQuery: (state) ->
-    state.searchQuery
 
 module.exports = { state, getters, mutations, actions }
