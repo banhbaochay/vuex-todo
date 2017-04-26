@@ -1,9 +1,13 @@
 <template>
+  <div class="main-app">
   <div>
     <nav-header></nav-header>
     <main-content></main-content>
     <nav-footer></nav-footer>
   </div>
+
+
+</div>
 </template>
 
 <script lang="coffee" type="text/coffeescript">
@@ -18,3 +22,6 @@ module.exports =
   }
 
 </script>
+<style>
+
+</style>

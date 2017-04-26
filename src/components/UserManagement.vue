@@ -2,11 +2,10 @@
 <div>
   <div id="hello-coffee">
     <div class="tab">
-      <button class="tablink" @click="swapComponent('account')">Account</button>
-      <button class="tablink" @click="swapComponent('user-address')">Address</button>
-      <button class="tablink" @click="swapComponent('info')">Info</button>
+      <div class="tablink" @click="swapComponent('account')">Account</div>
+      <div class="tablink" @click="swapComponent('user-address')">Address</div>
+      <div class="tablink" @click="swapComponent('info')">Info</div>
     </div>
-
     <component :is="currentComponent"></component>
     <table-user></table-user>
   </div>
@@ -33,7 +32,7 @@ module.exports =
     'info': Info,
   }
   methods: Object.assign(
-    swapComponent: (component) ->
+    swapComponent: (component, evt) ->
       @currentComponent = component
   )
 
@@ -58,13 +57,25 @@ div.tab button {
 }
 
 /* Change background color of buttons on hover */
-div.tab button:hover {
+div.tablink button:hover {
   background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
-div.tab button.active {
-  background-color: #ccc;
+.tablink:active{
+  background-color: grey;
+}
+.tablink {
+  display: inline-block;
+  height: 50px;
+  width: 100px;
+  color: black;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+}
+.activeTab{
+  background-color: grey;
 }
 
 </style>

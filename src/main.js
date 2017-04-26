@@ -24,15 +24,23 @@ Vue.use(VueRouter)
 var Welcome = require('./components/Welcome.vue')
 var Counter = require('./components/Counter.vue')
 var UserInformation = require('./components/UserInformation.vue')
+var UserManagement = require('./components/UserManagement.vue')
+var Error = require('./components/Error.vue')
 // const Foo = { template: '<div>foo</div>' }
 // const Bar = { template: '<div>bar</div>' }
 const routes = [
     // { path: '/foo', component: Foo },
     // { path: '/bar', component: Bar },
-    { name: 'home', path: '/', component: App },
-    { name: 'welcome', path: '/welcome', component: Welcome },
-    { name: 'counter', path: '/counter', component: Counter },
-    { name: 'user-info', path: '/user/:id', component: UserInformation }
+    { name: 'home', path: '/welcome', component: App ,
+      children:[
+        { name: 'welcome', path: '/welcome', component: Welcome },
+        { name: 'counter', path: '/counter', component: Counter },
+        { name: 'user-management', path: '/user-management', component: UserManagement
+        },{ name: 'user-info', path: '/user/:id', component: UserInformation }
+      ]
+    },
+    { name: 'error', path: '*', component: Error }
+
 ]
 
 const router = new VueRouter({
@@ -42,6 +50,6 @@ const router = new VueRouter({
 new Vue({
   store,
   router: router,
-  // el: '#hello-coffee',
-  // render: h => h(HelloCoffee)
-}).$mount("#app")
+  // el: '#app',
+  // render: h => h(App)
+}).$mount('#app');

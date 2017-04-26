@@ -3,9 +3,9 @@
   <table>
     <thead>
       <tr>
-        <th v-for="key in columns" @click="sortBy(key)">
-          {{ key }}
-        </th>
+        <th @click="sortBy('id')"> ID </th>
+        <th @click="sortBy('account')"> Account </th>
+        <th @click="sortBy('address')"> Address</th>
         <th>
           Action
         </th>
@@ -14,7 +14,7 @@
     <tbody>
       <tr>
         <td v-for="key in columns">
-          <input v-model="search[key]"/>
+          <input class="search" v-model="search[key]"/>
         </td>
       </tr>
       <tr v-for="user in filteredUsers">
@@ -55,16 +55,13 @@ module.exports =
       alert("Remove user " + id + " sucessfully !")
     sortBy: (key) ->
       @.$store.dispatch('sortBy', key)
-    searchUser: (key, evt) ->
-      @.$store.dispatch('searchUser', [key, evt.target.value])
-
   }
 
 </script>
 <style>
 table {
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
     margin-top: 10px;
 }
 
@@ -76,7 +73,16 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
 th {
-    background-color: #4CAF50;
+    background-color: #008CBA;
     color: white;
+}
+.search {
+  width: 150px;
+  padding: 5px 5px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 </style>
